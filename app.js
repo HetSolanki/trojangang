@@ -33,13 +33,13 @@ document
     outputDiv.scrollTop = outputDiv.scrollHeight;
 
     try {
-      const response = await fetch("https://social-media-performance-analysis.onrender.com/", {
+      const response = await fetch("https://social-media-performance-analysis.onrender.com", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ inputValue }),
-        mode: "no-cors",
+
       });
 
       const data = await response.json();
