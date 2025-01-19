@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form with Image</title>
+    <link rel="stylesheet" href="formstyle.css">
+</head>
+
+<body>
+    <div class="content-container">
+        <div class="form-container">
+            <form id="userForm">
+                <fieldset>
+                    <legend>Tell us your name:</legend>
+                    <label for="nametxt">Your Name</label>
+                    <input type="text" name="nametxt" id="nametxt" placeholder="Enter Your Name" required>
+
+                    <label for="datetxt">Date of Birth</label>
+                    <input type="date" name="datetxt" id="datetxt" required>
+
+                    <label for="timetxt">Time of Birth</label>
+                    <input type="time" name="timetxt" id="timetxt" required>
+
+                    <label>Gender</label>
+                    <div class="gender-options">
+                        <div class="radio-option">
+                            <input type="radio" name="gendertxt" id="maletxt" value="male">
+                            <label for="maletxt">Male</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="gendertxt" id="femaletxt" value="female">
+                            <label for="femaletxt">Female</label>
+                        </div>
+                    </div>
+
+                    <button type="submit">Submit</button>
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="image-container">
+            <img src="img7.png" alt="Form Illustration" />
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById("userForm");
+
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById("nametxt").value;
+            const dateOfBirth = document.getElementById("datetxt").value;
+            const timeOfBirth = document.getElementById("timetxt").value;
+            const gender = document.querySelector("input[name='gendertxt']:checked").value;
+
+            const data = {
+                name,
+                dateOfBirth,
+                timeOfBirth,
+                gender,
+            };
+
+            try {
+                const response = await fetch("http://localhost:3000/submit", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                const result = await response.json();
+                console.log("Response from Backend:", result);
+                alert("Data submitted successfully!");
+            } catch (error) {
+                console.error("Error submitting data:", error);
+                alert("Error submitting data.");
+            }
+        });
+    </script>
+</body>
+
+</html>
