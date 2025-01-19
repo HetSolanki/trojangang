@@ -33,7 +33,7 @@ document
     outputDiv.scrollTop = outputDiv.scrollHeight;
 
     try {
-      const response = await fetch("https://soulbuddy.vercel.app/api/chatbot", {
+      const response = await fetch("https://social-media-performance-analysis.onrender.com/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
